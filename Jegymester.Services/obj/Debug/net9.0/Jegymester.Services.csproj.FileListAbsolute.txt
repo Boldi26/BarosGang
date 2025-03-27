@@ -1,0 +1,15 @@
+D:\Documents\Jegymester\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.deps.json
+D:\Documents\Jegymester\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.dll
+D:\Documents\Jegymester\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.pdb
+D:\Documents\Jegymester\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.dll
+D:\Documents\Jegymester\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.AssemblyReference.cache
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.AssemblyInfoInputs.cache
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.AssemblyInfo.cs
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.CoreCompileInputs.cache
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymest.6BADC221.Up2Date
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.dll
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\refint\Jegymester.Services.dll
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.pdb
+D:\Documents\Jegymester\Jegymester.Services\obj\Debug\net9.0\ref\Jegymester.Services.dll

@@ -1,33 +1,41 @@
-﻿using Jegymester_BarosGang.Managers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Jegymester.DataContext.Context;
+using Jegymester.Services;
 
-namespace Jegymester_BarosGang;
+var builder = WebApplication.CreateBuilder(args);
 
-class Program
+// Add services to the container.
+
+builder.Services.AddControllers();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    static void Main(string[] args)
-    {
-        using var context = new AppDbContext();
-        
-        MovieManager movieManager = new MovieManager(context);
-        ScreeningManager screeningManager = new ScreeningManager(context);
-        UserManager userManager = new UserManager(context);
-        TicketManager ticketManager = new TicketManager(context);
-        
-        userManager.Create(new User
-        {
-            Email = "kucska.boldizsar@gmail.com",
-            Password = "JohnDoe123",
-            PhoneNumber = "063012345",
-            IsRegistered = true
-        });
-        
-        var movies = movieManager.GetAll();
-        var users = userManager.GetAll();
-        
-        foreach (var movie in movies)
-        {
-            Console.WriteLine(movie.ToString());
-        }
-    }
+    options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JegymesterDb;Trusted_Connection=True;TrustServerCertificate=True;");
+});
+
+builder.Services.AddScoped<IMovieService, MovieService>();
+
+// Swagger configuration
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Jegymester API", Version = "v1" });
+});
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Jegymester API v1"));
 }
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

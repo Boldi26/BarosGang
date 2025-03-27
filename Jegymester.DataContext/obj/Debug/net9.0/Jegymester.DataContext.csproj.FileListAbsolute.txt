@@ -1,0 +1,12 @@
+D:\Documents\Jegymester\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.deps.json
+D:\Documents\Jegymester\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.dll
+D:\Documents\Jegymester\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.AssemblyReference.cache
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.AssemblyInfoInputs.cache
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.AssemblyInfo.cs
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.CoreCompileInputs.cache
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.dll
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\refint\Jegymester.DataContext.dll
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Documents\Jegymester\Jegymester.DataContext\obj\Debug\net9.0\ref\Jegymester.DataContext.dll

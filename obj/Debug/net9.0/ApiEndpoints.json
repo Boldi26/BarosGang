@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "Jegymester.Controllers.MovieController",
+    "Method": "List",
+    "RelativePath": "api/Movie/List",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
