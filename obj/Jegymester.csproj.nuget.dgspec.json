@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj": {}
+    "C:\\Users\\Adam\\source\\repos\\BarosGang3\\Jegymester.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj": {
+    "C:\\Users\\Adam\\source\\repos\\BarosGang3\\Jegymester.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj",
+        "projectUniqueName": "C:\\Users\\Adam\\source\\repos\\BarosGang3\\Jegymester.csproj",
         "projectName": "Jegymester",
-        "projectPath": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj",
+        "projectPath": "C:\\Users\\Adam\\source\\repos\\BarosGang3\\Jegymester.csproj",
         "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\obj\\",
+        "outputPath": "C:\\Users\\Adam\\source\\repos\\BarosGang3\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

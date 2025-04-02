@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<IScreeningService, ScreeningService>();
 
 // Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
