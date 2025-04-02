@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documents\\Jegymester\\Jegymester.csproj": {}
+    "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj": {}
   },
   "projects": {
-    "D:\\Documents\\Jegymester\\Jegymester.csproj": {
+    "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\Jegymester\\Jegymester.csproj",
+        "projectUniqueName": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj",
         "projectName": "Jegymester",
-        "projectPath": "D:\\Documents\\Jegymester\\Jegymester.csproj",
-        "packagesPath": "C:\\Users\\b0ld1\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\Jegymester\\obj\\",
+        "projectPath": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\Jegymester.csproj",
+        "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adam\\source\\repos\\BarosGang2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\b0ld1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Adam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -56,6 +55,12 @@
               "version": "[9.0.3, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.3, )"
             },
@@ -93,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

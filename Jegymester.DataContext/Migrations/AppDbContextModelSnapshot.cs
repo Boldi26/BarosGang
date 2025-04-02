@@ -22,7 +22,7 @@ namespace Jegymester.DataContext.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Jegymester_BarosGang.Movie", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,10 +46,10 @@ namespace Jegymester.DataContext.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movies", (string)null);
+                    b.ToTable("Movies");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.Screening", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.Screening", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,10 +76,10 @@ namespace Jegymester.DataContext.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Screenings", (string)null);
+                    b.ToTable("Screenings");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.Ticket", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.Ticket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,10 +99,10 @@ namespace Jegymester.DataContext.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Tickets", (string)null);
+                    b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.User", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,12 +127,12 @@ namespace Jegymester.DataContext.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.Screening", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.Screening", b =>
                 {
-                    b.HasOne("Jegymester_BarosGang.Movie", "Movie")
+                    b.HasOne("Jegymester.DataContext.Entities.Movie", "Movie")
                         .WithMany()
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -141,22 +141,22 @@ namespace Jegymester.DataContext.Migrations
                     b.Navigation("Movie");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.Ticket", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.Ticket", b =>
                 {
-                    b.HasOne("Jegymester_BarosGang.Screening", "Screening")
+                    b.HasOne("Jegymester.DataContext.Entities.Screening", "Screening")
                         .WithMany()
                         .HasForeignKey("ScreeningId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Jegymester_BarosGang.User", null)
+                    b.HasOne("Jegymester.DataContext.Entities.User", null)
                         .WithMany("Tickets")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Screening");
                 });
 
-            modelBuilder.Entity("Jegymester_BarosGang.User", b =>
+            modelBuilder.Entity("Jegymester.DataContext.Entities.User", b =>
                 {
                     b.Navigation("Tickets");
                 });
