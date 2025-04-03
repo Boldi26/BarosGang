@@ -16,3 +16,21 @@ INSERT INTO Screenings (Id, MovieId, StartTime, Capacity, Price, Room) VALUES
 SET IDENTITY_INSERT Screenings OFF;
 
 SELECT * FROM Screenings;
+
+
+SET IDENTITY_INSERT Tickets ON;
+INSERT INTO Tickets (Id, ScreeningId, UserId) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 1, 2);
+SET IDENTITY_INSERT Tickets OFF;
+
+SELECT * FROM Tickets;
+
+SET IDENTITY_INSERT Users ON;
+INSERT INTO Users (Id, Email, Password, PhoneNumber, IsRegistered) VALUES
+(1, 'teszt1@gmail.com', 'password1', '062012345', 1),
+(2, 'teszt2@gmail.com', 'password2', '063069420', 1);
+SET IDENTITY_INSERT Users OFF;
+
+SELECT * FROM Users;

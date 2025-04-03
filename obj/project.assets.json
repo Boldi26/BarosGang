@@ -5168,11 +5168,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.csproj",
+      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj",
       "projectName": "Jegymester",
-      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.csproj",
+      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj",
       "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\obj\\",
+      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

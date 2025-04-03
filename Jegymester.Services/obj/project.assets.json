@@ -2771,11 +2771,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.Services\\Jegymester.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.Services\\Jegymester.Services.csproj",
       "projectName": "Jegymester.Services",
-      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.Services\\Jegymester.Services.csproj",
+      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.Services\\Jegymester.Services.csproj",
       "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.Services\\obj\\",
+      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2796,8 +2796,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
-              "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang3\\Jegymester.DataContext\\Jegymester.DataContext.csproj"
+            "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
+              "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.DataContext\\Jegymester.DataContext.csproj"
             }
           }
         }
