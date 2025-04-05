@@ -9,3 +9,14 @@ C:\Users\Adam\source\repos\BarosGang2\Jegymester.DataContext\obj\Debug\net9.0\Je
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.DataContext\obj\Debug\net9.0\refint\Jegymester.DataContext.dll
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.pdb
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.DataContext\obj\Debug\net9.0\ref\Jegymester.DataContext.dll
+D:\Unity Projects\BarosGang\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.deps.json
+D:\Unity Projects\BarosGang\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.dll
+D:\Unity Projects\BarosGang\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.AssemblyReference.cache
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.CoreCompileInputs.cache
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.sourcelink.json
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.dll
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\refint\Jegymester.DataContext.dll
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Unity Projects\BarosGang\Jegymester.DataContext\obj\Debug\net9.0\ref\Jegymester.DataContext.dll

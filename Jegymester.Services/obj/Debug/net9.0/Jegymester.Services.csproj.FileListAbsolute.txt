@@ -12,3 +12,17 @@ C:\Users\Adam\source\repos\BarosGang2\Jegymester.Services\obj\Debug\net9.0\Jegym
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.Services\obj\Debug\net9.0\refint\Jegymester.Services.dll
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.pdb
 C:\Users\Adam\source\repos\BarosGang2\Jegymester.Services\obj\Debug\net9.0\ref\Jegymester.Services.dll
+D:\Unity Projects\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.deps.json
+D:\Unity Projects\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.dll
+D:\Unity Projects\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.pdb
+D:\Unity Projects\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.dll
+D:\Unity Projects\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.pdb
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.AssemblyReference.cache
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.CoreCompileInputs.cache
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.sourcelink.json
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymest.6BADC221.Up2Date
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.dll
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\refint\Jegymester.Services.dll
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.pdb
+D:\Unity Projects\BarosGang\Jegymester.Services\obj\Debug\net9.0\ref\Jegymester.Services.dll

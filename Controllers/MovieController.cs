@@ -5,7 +5,7 @@ using Jegymester.DataContext.Dtos;
 namespace Jegymester.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
@@ -15,11 +15,22 @@ namespace Jegymester.Controllers
             _movieService = movieService;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public IActionResult List()
         {
             var result = _movieService.List();
             return Ok(result);
+        }
+
+        [HttpGet("get-movie/{id}")]
+        public async Task<IActionResult> GetMovie(int id)
+        {
+            var movie = await _movieService.GetMovieByIdAsync(id);
+            if (movie == null)
+            {
+                return NotFound("Film nem található.");
+            }
+            return Ok(movie);
         }
 
         [HttpPost("add-movie")]
@@ -48,6 +59,4 @@ namespace Jegymester.Controllers
             return result ? Ok("Film frissítve.") : NotFound("Film nem található.");
         }
     }
-
-    
 }

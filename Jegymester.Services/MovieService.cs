@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jegymester.Services
 {
     public interface IMovieService
     {
         List<Movie> List();
+        Task<Movie> GetMovieByIdAsync(int id);
         Task<MovieDto> AddMovieAsync(MovieDto movieDto);
         Task<bool> DeleteMovieAsync(int id);
         Task<bool> UpdateMovieAsync(int id, MovieUpdateDto movieDto);
@@ -31,6 +33,11 @@ namespace Jegymester.Services
             return _context.Movies.ToList();
         }
 
+        public async Task<Movie> GetMovieByIdAsync(int id)
+        {
+            return await _context.Movies.FindAsync(id);
+        }
+
         public async Task<MovieDto> AddMovieAsync(MovieDto movieDto)
         {
             var movie = new Movie
@@ -40,10 +47,8 @@ namespace Jegymester.Services
                 Genre = movieDto.Genre,
                 AgeLimit = movieDto.AgeLimit
             };
-
             await _context.Movies.AddAsync(movie);
             await _context.SaveChangesAsync();
-
             return movieDto;
         }
 
@@ -73,6 +78,5 @@ namespace Jegymester.Services
             }
             return false;
         }
-
     }
 }

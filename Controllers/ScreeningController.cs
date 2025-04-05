@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Jegymester.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class ScreeningController : ControllerBase
     {
         private readonly IScreeningService _screeningService;
@@ -16,7 +16,7 @@ namespace Jegymester.Controllers
             _screeningService = screeningService;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public IActionResult List()
         {
             var result = _screeningService.List();
@@ -31,22 +31,38 @@ namespace Jegymester.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _screeningService.AddScreeningAsync(screeningDto);
-            return Ok(result);
+            try
+            {
+                var result = await _screeningService.AddScreeningAsync(screeningDto);
+                return Ok(new { success = true, message = "Vetítés sikeresen hozzáadva", data = result });
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
         }
 
         [HttpDelete("delete-screening/{id}")]
         public async Task<IActionResult> DeleteScreening(int id)
         {
             var result = await _screeningService.DeleteScreeningAsync(id);
-            return result ? Ok("Vetítés törölve.") : NotFound("Vetítés nem található.");
+            return result ?
+                Ok(new { success = true, message = "Vetítés törölve." }) :
+                NotFound(new { success = false, message = "Vetítés nem található." });
         }
 
         [HttpPut("update-screening/{id}")]
         public async Task<IActionResult> UpdateScreening(int id, [FromBody] ScreeningUpdateDto screeningDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var result = await _screeningService.UpdateScreeningAsync(id, screeningDto);
-            return result ? Ok("Vetítés frissítve.") : NotFound("Vetítés nem található.");
+            return result ?
+                Ok(new { success = true, message = "Vetítés frissítve." }) :
+                NotFound(new { success = false, message = "Vetítés nem található." });
         }
     }
 }

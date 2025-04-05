@@ -1,14 +1,26 @@
+﻿using Jegymester.DataContext.Context;
+using Jegymester.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Jegymester.DataContext.Context;
-using Jegymester.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 
+// CORS policy beállítása
+// In Program.cs
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000", "https://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// DB context
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=JegymesterDb;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -17,7 +29,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<IScreeningService, ScreeningService>();
 
-// Swagger configuration
+// Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -26,7 +38,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Swagger UI
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -34,6 +46,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// 👉 CORS engedélyezése
+app.UseCors("AllowReactApp");
 
 app.UseAuthorization();
 
