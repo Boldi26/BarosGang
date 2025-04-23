@@ -9,13 +9,16 @@ namespace Jegymester.DataContext.Context
         public DbSet<Screening> Screenings { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Movie>()
                 .HasKey(m => m.Id);
             modelBuilder.Entity<User>()
-                .HasKey(u => u.Id);
+                .HasMany(u => u.Roles)
+                .WithMany(r => r.Users)
+                .UsingEntity(j => j.ToTable("UserRoles"));
             modelBuilder.Entity<Screening>()
                 .HasKey(s => s.Id);
             modelBuilder.Entity<Ticket>()

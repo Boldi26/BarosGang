@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jegymester.Services
 {
@@ -52,9 +53,14 @@ namespace Jegymester.Services
             var movie = await _context.Movies.FindAsync(id);
             if (movie != null)
             {
-                _context.Movies.Remove(movie);
-                await _context.SaveChangesAsync();
-                return true;
+                var hasOngoingScreenings = await _context.Screenings
+            .AnyAsync(s => s.MovieId == id && s.StartTime > DateTime.Now);
+                if (!hasOngoingScreenings)
+                {
+                    _context.Movies.Remove(movie);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
             }
             return false;
         }

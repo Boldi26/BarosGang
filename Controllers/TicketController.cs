@@ -39,7 +39,7 @@ namespace Jegymester.Controllers
         public async Task<IActionResult> DeleteTicket(int id)
         {
             var result = await _ticketService.DeleteTicketAsync(id);
-            return result ? Ok("Jegy törölve.") : NotFound("Jegy nem található.");
+            return result ? Ok("Jegy törölve.") : BadRequest("Jegy nem található vagy kevesebb mint 4 órán belül van.");
         }
     }
 }

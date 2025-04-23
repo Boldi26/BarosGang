@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj": {}
+    "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj": {
+    "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj",
+        "projectUniqueName": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj",
         "projectName": "Jegymester",
-        "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\Jegymester.csproj",
+        "projectPath": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj",
         "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang4\\obj\\",
+        "outputPath": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,22 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.4, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.3, )"

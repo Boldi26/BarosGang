@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Jegymester.Services;
 using Jegymester.DataContext.Dtos;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Jegymester.Controllers
 {
@@ -24,39 +26,39 @@ namespace Jegymester.Controllers
         }
 
         [HttpPost("register")]
+        [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var result = await _userService.RegisterAsync(userDto);
             return Ok(result);
         }
 
         [HttpPost("login")]
+        [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            var result = await _userService.LoginAsync(userDto);
-            return result != null ? Ok(result) : Unauthorized("Hibás email vagy jelszó.");
+
+            var token = await _userService.LoginAsync(userDto);
+            return Ok(new { Token = token });
         }
 
-        [HttpPut("update-user/{id}")]
+        [HttpPut("update user")]
+        [Authorize]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] UserUpdateDto userDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            var result = await _userService.UpdateUserAsync(id, userDto);
-            return result ? Ok("Felhasználó frissítve.") : NotFound("Felhasználó nem található.");
+            var userId = int.Parse(User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var result = await _userService.UpdateUserAsync(userId, userDto);
+            return Ok(result);
+        }
+
+        [HttpGet("roles")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetRoles()
+        {
+            var roles = await _userService.GetRolesAsync();
+            return Ok(roles);
         }
     }
 }

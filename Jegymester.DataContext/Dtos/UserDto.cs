@@ -14,6 +14,8 @@ namespace Jegymester.DataContext.Dtos
         public string PhoneNumber { get; set; }
 
         public bool IsRegistered { get; set; }
+
+        public IList<RoleDto> Roles { get; set; }
     }
 
     public class UserRegisterDto
@@ -27,6 +29,8 @@ namespace Jegymester.DataContext.Dtos
 
         [Required]
         public string PhoneNumber { get; set; }
+
+        public IList<int> RoleIds { get; set; }
     }
 
     public class UserLoginDto
@@ -47,5 +51,7 @@ namespace Jegymester.DataContext.Dtos
         [Required]
         [EmailAddress]
         public string Email { get; set; }
+
+        public IList<int> RoleIds { get; set; }
     }
 }

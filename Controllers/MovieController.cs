@@ -38,7 +38,7 @@ namespace Jegymester.Controllers
         public async Task<IActionResult> DeleteMovie(int id)
         {
             var result = await _movieService.DeleteMovieAsync(id);
-            return result ? Ok("Film törölve.") : NotFound("Film nem található.");
+            return result ? Ok("Film törölve.") : BadRequest("Film nem található vagy vetítés alatt van.");
         }
 
         [HttpPut("update-movie/{id}")]

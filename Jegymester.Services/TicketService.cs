@@ -57,12 +57,17 @@ namespace Jegymester.Services
 
         public async Task<bool> DeleteTicketAsync(int id)
         {
-            var ticket = await _context.Tickets.FindAsync(id);
+            var ticket = await _context.Tickets
+                .Include(t => t.Screening)
+        .FirstOrDefaultAsync(t => t.Id == id);
             if (ticket != null)
             {
-                _context.Tickets.Remove(ticket);
-                await _context.SaveChangesAsync();
-                return true;
+                if (ticket.Screening.StartTime > DateTime.Now.AddHours(4))
+                {
+                    _context.Tickets.Remove(ticket);
+                    await _context.SaveChangesAsync();
+                    return true;
+                }
             }
             return false;
         }
