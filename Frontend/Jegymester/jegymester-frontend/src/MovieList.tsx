@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MantineProvider, Container, Title, Table, Text, Center, Button } from '@mantine/core';
+import { MantineProvider, Container, Title, Table, Text, Center, Button, ColorSchemeScript } from '@mantine/core';
 
 interface Movie {
   id: number;
@@ -79,7 +79,7 @@ function MovieList() {
   return (
     <MantineProvider>
       <Container>
-        <Title order={2} mb="lg">Elérhető filmek</Title>
+        <Title order={2} style={{ marginBottom: '1.5rem' }}>Elérhető filmek</Title>
         {renderContent()}
       </Container>
     </MantineProvider>

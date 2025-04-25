@@ -2747,31 +2747,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\b0ld1\\.nuget\\packages\\": {},
+    "C:\\Users\\retki\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
-      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
+      "projectUniqueName": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
       "projectName": "Jegymester.DataContext",
-      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
-      "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\Jegymester.DataContext\\obj\\",
-=======
-      "projectUniqueName": "D:\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
-      "projectName": "Jegymester.DataContext",
-      "projectPath": "D:\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
-      "packagesPath": "C:\\Users\\b0ld1\\.nuget\\packages\\",
-      "outputPath": "D:\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\obj\\",
->>>>>>> 5ac12f7e767c88ce24ae211902b5a122c5f71150
+      "projectPath": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
+      "packagesPath": "C:\\Users\\retki\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\b0ld1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\retki\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2780,7 +2772,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2830,7 +2821,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

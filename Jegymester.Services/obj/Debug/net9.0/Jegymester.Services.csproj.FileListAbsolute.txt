@@ -40,3 +40,17 @@ C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.Services\obj\Debug\net9.0\Jegym
 C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.Services\obj\Debug\net9.0\refint\Jegymester.Services.dll
 C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.pdb
 C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.Services\obj\Debug\net9.0\ref\Jegymester.Services.dll
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.deps.json
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.dll
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.Services.pdb
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.dll
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\bin\Debug\net9.0\Jegymester.DataContext.pdb
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.AssemblyReference.cache
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.csproj.CoreCompileInputs.cache
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.sourcelink.json
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymest.6BADC221.Up2Date
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.dll
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\refint\Jegymester.Services.dll
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\Jegymester.Services.pdb
+C:\Users\retki\Documents\GitHub\BarosGang\Jegymester.Services\obj\Debug\net9.0\ref\Jegymester.Services.dll
