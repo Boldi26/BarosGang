@@ -13,6 +13,8 @@ namespace Jegymester.Services
             CreateMap<UserUpdateDto, User>();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<Ticket, TicketDto>().ReverseMap();
+            CreateMap<Ticket, TicketDto>().ReverseMap();
+            CreateMap<TicketPurchaseDto, Ticket>();
         }
     }
 }

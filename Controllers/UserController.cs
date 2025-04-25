@@ -19,6 +19,7 @@ namespace Jegymester.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> List()
         {
             var result = await _userService.ListAsync();

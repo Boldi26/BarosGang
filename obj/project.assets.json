@@ -5071,11 +5071,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj",
+      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\Jegymester.csproj",
       "projectName": "Jegymester",
-      "projectPath": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\Jegymester.csproj",
+      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\Jegymester.csproj",
       "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\source\\repos\\BarosGang5\\obj\\",
+      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang6\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

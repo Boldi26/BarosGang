@@ -20,3 +20,14 @@ C:\Users\Adam\source\repos\BarosGang5\Jegymester.DataContext\obj\Debug\net9.0\Je
 C:\Users\Adam\source\repos\BarosGang5\Jegymester.DataContext\obj\Debug\net9.0\refint\Jegymester.DataContext.dll
 C:\Users\Adam\source\repos\BarosGang5\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.pdb
 C:\Users\Adam\source\repos\BarosGang5\Jegymester.DataContext\obj\Debug\net9.0\ref\Jegymester.DataContext.dll
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.deps.json
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.dll
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\bin\Debug\net9.0\Jegymester.DataContext.pdb
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.AssemblyReference.cache
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.csproj.CoreCompileInputs.cache
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.sourcelink.json
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.dll
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\refint\Jegymester.DataContext.dll
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\Jegymester.DataContext.pdb
+C:\Users\Adam\Source\Repos\BarosGang6\Jegymester.DataContext\obj\Debug\net9.0\ref\Jegymester.DataContext.dll

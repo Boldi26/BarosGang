@@ -1,75 +1,115 @@
-﻿using Jegymester.DataContext.Context;
+﻿using AutoMapper;
+using Jegymester.DataContext.Context;
 using Jegymester.DataContext.Entities;
 using Jegymester.DataContext.Dtos;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.QueryableExtensions;
 
 namespace Jegymester.Services
 {
     public interface ITicketService
     {
-        Task<List<TicketDto>> ListAsync();
-        Task<TicketDto> AddTicketAsync(TicketCreateDto ticketDto);
+        Task<List<TicketDto>> ListAsync(int userId);
+        Task<TicketDto> PurchaseTicketAsync(TicketPurchaseDto ticketDto);
         Task<bool> DeleteTicketAsync(int id);
     }
 
     public class TicketService : ITicketService
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public TicketService(AppDbContext context)
+        public TicketService(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<List<TicketDto>> ListAsync()
+        public async Task<List<TicketDto>> ListAsync(int userId)
         {
             return await _context.Tickets
-                .Include(t => t.User)
-                .Select(t => new TicketDto
-                {
-                    Id = t.Id,
-                    ScreeningId = t.ScreeningId,
-                    UserId = t.UserId
-                }).ToListAsync();
+        .Where(t => t.UserId == userId)
+        .ProjectTo<TicketDto>(_mapper.ConfigurationProvider)
+        .ToListAsync();
         }
 
-        public async Task<TicketDto> AddTicketAsync(TicketCreateDto ticketDto)
+        public async Task<TicketDto> PurchaseTicketAsync(TicketPurchaseDto ticketDto)
         {
+            if (ticketDto.UserId == null && (string.IsNullOrWhiteSpace(ticketDto.Email) || string.IsNullOrWhiteSpace(ticketDto.PhoneNumber)))
+                throw new ArgumentException("Email and phone number required for non registered users.");
+
+            var ticketCount = await _context.Tickets.CountAsync(t => t.ScreeningId == ticketDto.ScreeningId);
+            var screening = await _context.Screenings.Include(s => s.Movie)
+    .FirstOrDefaultAsync(s => s.Id == ticketDto.ScreeningId);
+
+            if (screening == null)
+                throw new ArgumentException("Screening not found.");
+
+            if (screening.StartTime <= DateTime.Now)
+                throw new InvalidOperationException("Screening has already started.");
+
+            if (screening.StartTime.Add(TimeSpan.FromMinutes(screening.Movie.Length)) <= DateTime.Now)
+                throw new InvalidOperationException("Screenig has already ended.");
+
+            if (ticketCount >= screening.Capacity)
+                throw new InvalidOperationException("Screening capacity full.");
+
+            int userId;
+
+            User? user=null;
+
+            if (ticketDto.UserId.HasValue)
+            {
+                userId = ticketDto.UserId.Value;
+                user = await _context.Users.FindAsync(userId);
+            }
+            else
+            {
+                user = new User
+                {
+                    Email = ticketDto.Email!,
+                    PhoneNumber = ticketDto.PhoneNumber!,
+                    IsRegistered = false,
+                    PasswordHash = ""
+                };
+                _context.Users.Add(user);
+                await _context.SaveChangesAsync();
+
+                userId = user.Id;
+            }
+
             var ticket = new Ticket
             {
                 ScreeningId = ticketDto.ScreeningId,
-                UserId = ticketDto.UserId
+                UserId = userId,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
             };
 
-            await _context.Tickets.AddAsync(ticket);
+            _context.Tickets.Add(ticket);
             await _context.SaveChangesAsync();
 
-            return new TicketDto
-            {
-                Id = ticket.Id,
-                ScreeningId = ticket.ScreeningId,
-                UserId=ticket.UserId
-            };
+            return _mapper.Map<TicketDto>(ticket);
         }
 
         public async Task<bool> DeleteTicketAsync(int id)
         {
             var ticket = await _context.Tickets
-                .Include(t => t.Screening)
-        .FirstOrDefaultAsync(t => t.Id == id);
-            if (ticket != null)
-            {
-                if (ticket.Screening.StartTime > DateTime.Now.AddHours(4))
-                {
-                    _context.Tickets.Remove(ticket);
-                    await _context.SaveChangesAsync();
-                    return true;
-                }
-            }
-            return false;
+        .Include(t => t.Screening)
+        .FirstOrDefaultAsync(t => t.Id ==id);
+
+            if (ticket == null)
+                return false;
+
+            if (ticket.Screening.StartTime <= DateTime.Now.AddHours(4))
+                return false;
+
+            _context.Tickets.Remove(ticket);
+            await _context.SaveChangesAsync();
+            return true;
         }
     }
 }

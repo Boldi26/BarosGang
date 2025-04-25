@@ -9,18 +9,27 @@ namespace Jegymester.DataContext.Dtos
         [Required]
         public int ScreeningId { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        
+        public int? UserId { get; set; }
+
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
 
     }
 
-    public class TicketCreateDto
+    public class TicketPurchaseDto
     {
         [Required]
         public int ScreeningId { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        
+        public int? UserId { get; set; }
+
+        [EmailAddress]
+        public string? Email { get; set; }
+
+        [Phone]
+        public string? PhoneNumber { get; set; }
     }
 
     public class TicketDeleteDto

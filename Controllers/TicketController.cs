@@ -2,6 +2,9 @@
 using Jegymester.Services;
 using Jegymester.DataContext.Dtos;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.Linq;
 
 namespace Jegymester.Controllers
 {
@@ -17,29 +20,72 @@ namespace Jegymester.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> List()
         {
-            var result = await _ticketService.ListAsync();
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+                return Unauthorized("User id not found.");
+
+            if (!int.TryParse(userIdClaim.Value, out var userId))
+                return BadRequest("Invalid user id.");
+
+            var result = await _ticketService.ListAsync(userId);
             return Ok(result);
         }
 
-        [HttpPost("add-ticket")]
-        public async Task<IActionResult> AddTicket([FromBody] TicketCreateDto ticketDto)
+        [HttpPost("purchase-ticket")]
+        [AllowAnonymous]
+        public async Task<IActionResult> PurchaseTicket([FromBody] TicketPurchaseDto ticketDto)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
+
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+            if (userIdClaim != null && int.TryParse(userIdClaim.Value, out var currentUserId))
+            {
+                if (!User.IsInRole("Cashier"))
+                {
+                    ticketDto.UserId = currentUserId;
+                }
             }
 
-            var result = await _ticketService.AddTicketAsync(ticketDto);
-            return Ok(result);
+            try
+            {
+                var result = await _ticketService.PurchaseTicketAsync(ticketDto);
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete("delete-ticket/{id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteTicket(int id)
         {
-            var result = await _ticketService.DeleteTicketAsync(id);
-            return result ? Ok("Jegy törölve.") : BadRequest("Jegy nem található vagy kevesebb mint 4 órán belül van.");
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var currentUserId))
+                return Unauthorized("User ID is invalid.");
+
+            var isAdminOrCashier = User.IsInRole("Admin") || User.IsInRole("Cashier");
+
+            if (isAdminOrCashier)
+            {
+                var result = await _ticketService.DeleteTicketAsync(id);
+                return result ? Ok("Ticket deleted.") : BadRequest("Ticket not found or within 4 hours of screening.");
+            }
+
+            var userTickets = await _ticketService.ListAsync(currentUserId);
+            var ticket = userTickets.FirstOrDefault(t => t.Id == id);
+
+            if (ticket == null)
+                return BadRequest("You can only delete your own tickets.");
+
+            var deleteResult = await _ticketService.DeleteTicketAsync(id);
+            return deleteResult ? Ok("Ticket deleted.") : BadRequest("Ticket not found or within 4 hours of screening.");
         }
     }
 }

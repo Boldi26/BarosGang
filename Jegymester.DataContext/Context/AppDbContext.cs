@@ -23,6 +23,13 @@ namespace Jegymester.DataContext.Context
                 .HasKey(s => s.Id);
             modelBuilder.Entity<Ticket>()
                 .HasKey(t => t.Id);
+            modelBuilder.Entity<Ticket>()
+        .Property(t => t.Email)
+        .HasMaxLength(255);
+
+            modelBuilder.Entity<Ticket>()
+                .Property(t => t.PhoneNumber)
+                .HasMaxLength(20);
         }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
     }

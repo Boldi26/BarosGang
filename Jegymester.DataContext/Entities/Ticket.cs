@@ -7,10 +7,9 @@ public class Ticket
     public Screening Screening { get; set; }
 
     public int UserId { get; set; } 
-    public User User { get; set; }  
+    public User User { get; set; }
 
-    public override string ToString()
-    {
-        return $"Id: {Id}, ScreeningId: {ScreeningId}, UserId: {UserId}";
-    }
+    public string? Email { get; set; }
+    public string? PhoneNumber { get; set; }
+
 }
