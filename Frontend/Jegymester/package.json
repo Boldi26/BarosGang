@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@mantine/carousel": "^7.17.3",
+    "@mantine/charts": "^7.17.3",
+    "@mantine/code-highlight": "^7.17.3",
+    "@mantine/core": "^7.17.3",
+    "@mantine/dates": "^7.17.3",
+    "@mantine/dropzone": "^7.17.3",
+    "@mantine/form": "^7.17.3",
+    "@mantine/hooks": "^7.17.3",
+    "@mantine/modals": "^7.17.3",
+    "@mantine/notifications": "^7.17.3",
+    "@mantine/nprogress": "^7.17.3",
+    "@mantine/spotlight": "^7.17.3",
+    "@tiptap/extension-link": "^2.11.7",
+    "@tiptap/pm": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
+    "@types/react-router-dom": "^5.3.3",
+    "dayjs": "^1.11.13",
+    "embla-carousel-react": "^7.1.0",
+    "react-router-dom": "^7.5.0"
+  }
+}
