@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {}
+    "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {}
   },
   "projects": {
-    "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
+    "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
+        "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
         "projectName": "Jegymester.DataContext",
-        "projectPath": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
-        "packagesPath": "C:\\Users\\retki\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\retki\\Documents\\GitHub\\BarosGang\\Jegymester.DataContext\\obj\\",
+        "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj",
+        "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\retki\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Adam\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

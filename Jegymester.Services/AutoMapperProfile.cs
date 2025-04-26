@@ -15,6 +15,10 @@ namespace Jegymester.Services
             CreateMap<Ticket, TicketDto>().ReverseMap();
             CreateMap<Ticket, TicketDto>().ReverseMap();
             CreateMap<TicketPurchaseDto, Ticket>();
+            CreateMap<Movie, MovieDto>().ReverseMap();
+            CreateMap<MovieUpdateDto, Movie>();
+            CreateMap<Screening, ScreeningDto>().ReverseMap();
+            CreateMap<ScreeningUpdateDto, Screening>();
         }
     }
 }

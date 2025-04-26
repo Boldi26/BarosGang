@@ -2,11 +2,13 @@
 using Jegymester.Services;
 using Jegymester.DataContext.Dtos;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jegymester.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize(Roles = "Admin")]
     public class ScreeningController : ControllerBase
     {
         private readonly IScreeningService _screeningService;
@@ -17,6 +19,7 @@ namespace Jegymester.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult List()
         {
             var result = _screeningService.List();
@@ -39,14 +42,14 @@ namespace Jegymester.Controllers
         public async Task<IActionResult> DeleteScreening(int id)
         {
             var result = await _screeningService.DeleteScreeningAsync(id);
-            return result ? Ok("Vetítés törölve.") : NotFound("Vetítés nem található.");
+            return result ? Ok("Screening deleted.") : NotFound("Screening not found or is already finished.");
         }
 
         [HttpPut("update-screening/{id}")]
         public async Task<IActionResult> UpdateScreening(int id, [FromBody] ScreeningUpdateDto screeningDto)
         {
             var result = await _screeningService.UpdateScreeningAsync(id, screeningDto);
-            return result ? Ok("Vetítés frissítve.") : NotFound("Vetítés nem található.");
+            return result ? Ok("Screening updated.") : NotFound("Screening not found.");
         }
     }
 }

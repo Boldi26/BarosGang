@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Jegymester.Services;
 using Jegymester.DataContext.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Jegymester.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
+    [Authorize(Roles = "Admin")]
     public class MovieController : ControllerBase
     {
         private readonly IMovieService _movieService;
@@ -16,6 +18,7 @@ namespace Jegymester.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult List()
         {
             var result = _movieService.List();
@@ -38,16 +41,16 @@ namespace Jegymester.Controllers
         public async Task<IActionResult> DeleteMovie(int id)
         {
             var result = await _movieService.DeleteMovieAsync(id);
-            return result ? Ok("Film törölve.") : BadRequest("Film nem található vagy vetítés alatt van.");
+            return result ? Ok("Movie deleted.") : BadRequest("Movie not found or already on screening.");
         }
 
         [HttpPut("update-movie/{id}")]
         public async Task<IActionResult> UpdateMovie(int id, [FromBody] MovieUpdateDto movieDto)
         {
             var result = await _movieService.UpdateMovieAsync(id, movieDto);
-            return result ? Ok("Film frissítve.") : NotFound("Film nem található.");
+            return result ? Ok("Movie updated.") : NotFound("Movie not found.");
         }
     }
 
-    
+
 }

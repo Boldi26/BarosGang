@@ -1,4 +1,5 @@
-﻿using Jegymester.DataContext.Context;
+﻿using AutoMapper;
+using Jegymester.DataContext.Context;
 using Jegymester.DataContext.Entities;
 using Jegymester.DataContext.Dtos;
 using System;
@@ -12,7 +13,7 @@ namespace Jegymester.Services
 {
     public interface IMovieService
     {
-        List<Movie> List();
+        List<MovieDto> List();
         Task<MovieDto> AddMovieAsync(MovieDto movieDto);
         Task<bool> DeleteMovieAsync(int id);
         Task<bool> UpdateMovieAsync(int id, MovieUpdateDto movieDto);
@@ -21,31 +22,28 @@ namespace Jegymester.Services
     public class MovieService : IMovieService
     {
         private readonly AppDbContext _context;
+        private readonly IMapper _mapper;
 
-        public MovieService(AppDbContext context)
+
+        public MovieService(AppDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public List<Movie> List()
+        public List<MovieDto> List()
         {
-            return _context.Movies.ToList();
+            var movies = _context.Movies.ToList();
+            return _mapper.Map<List<MovieDto>>(movies);
         }
 
         public async Task<MovieDto> AddMovieAsync(MovieDto movieDto)
         {
-            var movie = new Movie
-            {
-                Name = movieDto.Name,
-                Length = movieDto.Length,
-                Genre = movieDto.Genre,
-                AgeLimit = movieDto.AgeLimit
-            };
-
+            var movie = _mapper.Map<Movie>(movieDto);
             await _context.Movies.AddAsync(movie);
             await _context.SaveChangesAsync();
 
-            return movieDto;
+            return _mapper.Map<MovieDto>(movie);
         }
 
         public async Task<bool> DeleteMovieAsync(int id)
@@ -54,7 +52,7 @@ namespace Jegymester.Services
             if (movie != null)
             {
                 var hasOngoingScreenings = await _context.Screenings
-            .AnyAsync(s => s.MovieId == id && s.StartTime > DateTime.Now);
+                    .AnyAsync(s => s.MovieId == id && s.StartTime > DateTime.Now);
                 if (!hasOngoingScreenings)
                 {
                     _context.Movies.Remove(movie);
@@ -70,15 +68,12 @@ namespace Jegymester.Services
             var movie = await _context.Movies.FindAsync(id);
             if (movie != null)
             {
-                movie.Name = movieDto.Name;
-                movie.Length = movieDto.Length;
-                movie.Genre = movieDto.Genre;
-                movie.AgeLimit = movieDto.AgeLimit;
+                _mapper.Map(movieDto, movie);
                 await _context.SaveChangesAsync();
                 return true;
             }
             return false;
         }
-
     }
+
 }
