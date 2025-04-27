@@ -17,7 +17,8 @@ namespace Jegymester.Services
     {
         Task<List<UserDto>> ListAsync();
         Task<UserDto> RegisterAsync(UserRegisterDto userDto);
-        Task<string> LoginAsync(UserLoginDto userDto);
+        Task<string?> LoginAsync(UserLoginDto userDto);
+
         Task<UserDto> UpdateUserAsync(int id, UserUpdateDto userDto);
         Task<IList<RoleDto>> GetRolesAsync();
     }
@@ -51,7 +52,7 @@ namespace Jegymester.Services
             user.Roles = new List<Role>();
             user.IsRegistered = true;
 
-            if (userDto.RoleIds != null)
+            if (userDto.RoleIds != null && userDto.RoleIds.Any())
             {
                 foreach (var roleId in userDto.RoleIds)
                 {
@@ -62,6 +63,14 @@ namespace Jegymester.Services
                     }
                 }
             }
+            else
+            {
+                var defaultRole = await _context.Roles.FirstOrDefaultAsync(r => r.Name == "User");
+                if (defaultRole != null)
+                {
+                    user.Roles.Add(defaultRole);
+                }
+            }
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -69,18 +78,30 @@ namespace Jegymester.Services
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<string> LoginAsync(UserLoginDto userDto)
+
+        public async Task<string?> LoginAsync(UserLoginDto userDto)
         {
-            var user = await _context.Users
-               .Include(u => u.Roles)
-               .FirstOrDefaultAsync(u => u.Email == userDto.Email);
+            try
+            {
+                var user = await _context.Users
+                   .Include(u => u.Roles)
+                   .FirstOrDefaultAsync(u => u.Email == userDto.Email);
 
-            if (user == null || !BCrypt.Net.BCrypt.Verify(userDto.Password.Trim(), user.PasswordHash))
-                throw new UnauthorizedAccessException("Invalid credentials.");
+                if (user == null)
+                    return null;
 
-            return await GenerateToken(user);
+                if (!BCrypt.Net.BCrypt.Verify(userDto.Password.Trim(), user.PasswordHash))
+                    return null;
 
+                return await GenerateToken(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during login: {ex.Message}");
+                return null;
+            }
         }
+
 
         private async Task<string> GenerateToken(User user)
         {

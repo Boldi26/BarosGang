@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MantineProvider, Container, Title, Table, Text, Center, Button, ColorSchemeScript } from '@mantine/core';
+import { Container, Title, Table, Text, Center, Button } from '@mantine/core';
+import { useAuth } from './AuthContext';
 
 interface Movie {
   id: number;
@@ -13,6 +14,7 @@ function MovieList() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -31,12 +33,22 @@ function MovieList() {
   }, []);
 
   const handleDelete = async (id: number) => {
+    if (!isAdmin) return;
+
     try {
-      const response = await fetch(`http://localhost:5214/api/Movie/delete-movie/${id}`, {
+      const token = localStorage.getItem('token');
+      
+      const response = await fetch(`http://localhost:5214/api/Movie/DeleteMovie/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`  
+        }
       });
+      
       if (response.ok) {
         setMovies(movies.filter(m => m.id !== id));
+      } else {
+        console.error('Delete failed:', await response.text());
       }
     } catch (error) {
       console.error('Delete failed:', error);
@@ -52,23 +64,27 @@ function MovieList() {
       <Table striped highlightOnHover>
         <thead>
           <tr>
+            {isAdmin && <th>ID</th>}
             <th>Név</th>
             <th>Műfaj</th>
             <th>Hossz</th>
             <th>Korhatár</th>
-            <th>Műveletek</th>
+            {isAdmin && <th>Műveletek</th>}
           </tr>
         </thead>
         <tbody>
           {movies.map(movie => (
             <tr key={movie.id}>
+              {isAdmin && <td>{movie.id}</td>}
               <td>{movie.name}</td>
               <td>{movie.genre}</td>
               <td>{movie.length} perc</td>
               <td>{movie.ageLimit}+</td>
-              <td>
-                <Button color="red" onClick={() => handleDelete(movie.id)}>Törlés</Button>
-              </td>
+              {isAdmin && (
+                <td>
+                  <Button color="red" onClick={() => handleDelete(movie.id)}>Törlés</Button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
@@ -77,12 +93,10 @@ function MovieList() {
   };
 
   return (
-    <MantineProvider>
-      <Container>
-        <Title order={2} style={{ marginBottom: '1.5rem' }}>Elérhető filmek</Title>
-        {renderContent()}
-      </Container>
-    </MantineProvider>
+    <Container>
+      <Title order={2} style={{ marginBottom: '1.5rem' }}>Elérhető filmek</Title>
+      {renderContent()}
+    </Container>
   );
 }
 

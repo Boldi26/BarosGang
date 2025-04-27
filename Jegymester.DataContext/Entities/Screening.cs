@@ -8,5 +8,5 @@ public class Screening
     public DateTime StartTime { get; set; }
     public int Capacity { get; set; }
     public int Price { get; set; }
-    public int Room { get; set; }
+    public int Room { get; set; } 
 }

@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { MantineProvider, Container, Title, TextInput, Button, Group, Text } from '@mantine/core';
+import { useAuth } from './AuthContext'; 
 
 function UpdateScreening() {
+  const { getToken } = useAuth();
   const [id, setId] = useState('');
   const [form, setForm] = useState({ 
     startTime: '', 
@@ -14,9 +16,14 @@ function UpdateScreening() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:5214/api/Screening/update-screening/${id}`, {
+      const token = getToken();
+      
+      const response = await fetch(`http://localhost:5214/api/Screening/UpdateScreening/${id}`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({
           startTime: new Date(form.startTime).toISOString(),
           room: parseInt(form.room),
@@ -30,11 +37,18 @@ function UpdateScreening() {
         setForm({ startTime: '', room: '', capacity: '', price: '' });
         setId('');
       } else {
-        const errorData = await response.json();
-        setMessage(`Hiba: ${errorData.message || 'Ismeretlen hiba'}`);
+        let errorMessage = 'Ismeretlen hiba';
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || 'Ismeretlen hiba';
+        } catch (e) {
+          errorMessage = `HTTP hiba: ${response.status}`;
+        }
+        setMessage(`Hiba: ${errorMessage}`);
       }
     } catch (error) {
       setMessage('Hálózati hiba történt');
+      console.error('Hiba:', error);
     }
   };
 

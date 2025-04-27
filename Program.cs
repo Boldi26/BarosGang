@@ -9,8 +9,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -59,7 +57,6 @@ builder.Services.AddCors();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
-// Swagger configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -88,7 +85,6 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -97,15 +93,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseCors(options =>
 {
     options.AllowAnyMethod();
     options.AllowAnyOrigin();
     options.AllowAnyHeader();
 });
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

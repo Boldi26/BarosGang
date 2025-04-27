@@ -2,6 +2,7 @@
 using Jegymester.Services;
 using Jegymester.DataContext.Dtos;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
 
 namespace Jegymester.Controllers
 {
@@ -25,7 +26,18 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
-        [HttpPost("add-movie")]
+        [HttpGet("{id}")]
+        [AllowAnonymous] // Allow anyone to get movie details
+        public async Task<IActionResult> GetMovie(int id)
+        {
+            var movie = await _movieService.GetMovieAsync(id);
+            if (movie == null)
+                return NotFound("Movie not found");
+
+            return Ok(movie);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> AddMovie([FromBody] MovieDto movieDto)
         {
             if (!ModelState.IsValid)
@@ -37,20 +49,18 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("delete-movie/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMovie(int id)
         {
             var result = await _movieService.DeleteMovieAsync(id);
             return result ? Ok("Movie deleted.") : BadRequest("Movie not found or already on screening.");
         }
 
-        [HttpPut("update-movie/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMovie(int id, [FromBody] MovieUpdateDto movieDto)
         {
             var result = await _movieService.UpdateMovieAsync(id, movieDto);
             return result ? Ok("Movie updated.") : NotFound("Movie not found.");
         }
     }
-
-
 }

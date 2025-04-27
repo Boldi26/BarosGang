@@ -9,7 +9,7 @@ using System.Linq;
 namespace Jegymester.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     public class TicketController : ControllerBase
     {
         private readonly ITicketService _ticketService;
@@ -19,7 +19,7 @@ namespace Jegymester.Controllers
             _ticketService = ticketService;
         }
 
-        [HttpGet]
+        [HttpGet("List")]
         [Authorize]
         public async Task<IActionResult> List()
         {

@@ -15,6 +15,7 @@ namespace Jegymester.Services
     {
         List<MovieDto> List();
         Task<MovieDto> AddMovieAsync(MovieDto movieDto);
+        Task<MovieDto> GetMovieAsync(int id);
         Task<bool> DeleteMovieAsync(int id);
         Task<bool> UpdateMovieAsync(int id, MovieUpdateDto movieDto);
     }
@@ -24,7 +25,11 @@ namespace Jegymester.Services
         private readonly AppDbContext _context;
         private readonly IMapper _mapper;
 
-
+        public async Task<MovieDto> GetMovieAsync(int id)
+        {
+            var movie = await _context.Movies.FindAsync(id);
+            return movie != null ? _mapper.Map<MovieDto>(movie) : null;
+        }
         public MovieService(AppDbContext context, IMapper mapper)
         {
             _context = context;

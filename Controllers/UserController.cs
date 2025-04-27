@@ -26,7 +26,7 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] UserRegisterDto userDto)
         {
@@ -34,13 +34,17 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserLoginDto userDto)
         {
-
-
             var token = await _userService.LoginAsync(userDto);
+
+            if (token == null)
+            {
+                return Unauthorized(new { Message = "Invalid credentials." });
+            }
+
             return Ok(new { Token = token });
         }
 

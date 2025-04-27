@@ -44,33 +44,36 @@ function AddScreening() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     if (!validateForm()) {
       return;
     }
-
+  
     const payload = {
       MovieId: parseInt(form.movieId),
       StartTime: new Date(form.startTime).toISOString(),
-      Room: form.room,
+      Room: parseInt(form.room),
       Capacity: form.capacity,
       Price: form.price,
     };
-    console.log('Sending payload:', payload);
-
+    
     try {
-      const response = await fetch('http://localhost:5214/api/Screening/add-screening', {
+      const token = localStorage.getItem('token');
+      
+      const response = await fetch('http://localhost:5214/api/Screening/AddScreening', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify(payload),
       });
-
+  
       if (response.ok) {
         setMessage('Vetítés sikeresen hozzáadva!');
         setForm({ movieId: '', startTime: '', room: '', capacity: 0, price: 0 });
       } else {
         const errorData = await response.json();
-        console.log('Server error response:', errorData);
         setError(`Hiba történt: ${response.status} - ${errorData.message || 'Ismeretlen hiba'}`);
       }
     } catch (error) {

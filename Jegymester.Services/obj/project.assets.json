@@ -2871,23 +2871,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Adam\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\folde\\.nuget\\packages\\": {},
+    "D:\\VS Components\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.Services\\Jegymester.Services.csproj",
+      "projectUniqueName": "D:\\Unity Projects\\BarosGang\\Jegymester.Services\\Jegymester.Services.csproj",
       "projectName": "Jegymester.Services",
-      "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.Services\\Jegymester.Services.csproj",
-      "packagesPath": "C:\\Users\\Adam\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.Services\\obj\\",
+      "projectPath": "D:\\Unity Projects\\BarosGang\\Jegymester.Services\\Jegymester.Services.csproj",
+      "packagesPath": "C:\\Users\\folde\\.nuget\\packages\\",
+      "outputPath": "D:\\Unity Projects\\BarosGang\\Jegymester.Services\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\VS Components\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Adam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\folde\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -2902,8 +2902,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
-              "projectPath": "C:\\Users\\Adam\\Source\\Repos\\BarosGang8\\Jegymester.DataContext\\Jegymester.DataContext.csproj"
+            "D:\\Unity Projects\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj": {
+              "projectPath": "D:\\Unity Projects\\BarosGang\\Jegymester.DataContext\\Jegymester.DataContext.csproj"
             }
           }
         }
@@ -2953,7 +2953,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

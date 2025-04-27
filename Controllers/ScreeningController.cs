@@ -26,26 +26,33 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
-        [HttpPost("add-screening")]
+        [HttpPost]
         public async Task<IActionResult> AddScreening([FromBody] ScreeningDto screeningDto)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(new { message = "Invalid data", errors = ModelState });
             }
 
-            var result = await _screeningService.AddScreeningAsync(screeningDto);
-            return Ok(result);
+            try
+            {
+                var result = await _screeningService.AddScreeningAsync(screeningDto);
+                return Ok(new { message = "Screening added successfully", data = result });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "An error occurred while adding the screening", error = ex.Message });
+            }
         }
 
-        [HttpDelete("delete-screening/{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteScreening(int id)
         {
             var result = await _screeningService.DeleteScreeningAsync(id);
             return result ? Ok("Screening deleted.") : NotFound("Screening not found or is already finished.");
         }
 
-        [HttpPut("update-screening/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateScreening(int id, [FromBody] ScreeningUpdateDto screeningDto)
         {
             var result = await _screeningService.UpdateScreeningAsync(id, screeningDto);

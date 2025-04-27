@@ -1,12 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MantineProvider, Container, Title, TextInput, NumberInput, Button, Group, Text, Alert, Card, LoadingOverlay } from '@mantine/core';
+import { useAuth } from './AuthContext';
 
-// Define validation patterns and error messages
 const NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\-:,.!?()]{2,100}$/;
 const GENRE_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ\s\-,]{2,50}$/;
 const ID_PATTERN = /^\d+$/;
 
-// Define types for movie data
 interface Movie {
   id: number;
   name: string;
@@ -31,11 +30,11 @@ interface FormErrors {
 }
 
 function UpdateMovie() {
-  // State for movie ID
+  const { getToken, isAdmin } = useAuth();
+  
   const [id, setId] = useState('');
   const [idError, setIdError] = useState('');
   
-  // State for form
   const [form, setForm] = useState<MovieForm>({
     name: '',
     length: '',
@@ -43,7 +42,6 @@ function UpdateMovie() {
     ageLimit: ''
   });
   
-  // State for UI
   const [errors, setErrors] = useState<FormErrors>({});
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
@@ -51,25 +49,28 @@ function UpdateMovie() {
   const [isSearching, setIsSearching] = useState(false);
   const [movieFound, setMovieFound] = useState(false);
   
-  // Validate ID input
+  useEffect(() => {
+    if (!isAdmin) {
+      setMessage('Ez az oldal csak adminisztrátorok számára érhető el.');
+      setIsError(true);
+    }
+  }, [isAdmin]);
+  
   const validateId = (value: string): string => {
     if (!value.trim()) return 'Az ID megadása kötelező';
     if (!ID_PATTERN.test(value)) return 'Az ID csak számokat tartalmazhat';
     return '';
   };
   
-  // Handle ID change
   const handleIdChange = (value: string) => {
     setId(value);
     setIdError(validateId(value));
     
-    // Reset movie data if ID changes
     if (movieFound) {
       setMovieFound(false);
     }
   };
   
-  // Validate a single field
   const validateField = (name: string, value: any): string => {
     switch (name) {
       case 'name':
@@ -95,15 +96,12 @@ function UpdateMovie() {
     }
   };
   
-  // Handle change in any input field
   const handleChange = (name: string, value: any) => {
-    // Update form state
     setForm(prev => ({
       ...prev,
       [name]: value
     }));
     
-    // Validate and update errors
     const errorMessage = validateField(name, value);
     setErrors(prev => ({
       ...prev,
@@ -111,12 +109,10 @@ function UpdateMovie() {
     }));
   };
   
-  // Validate entire form
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     let isValid = true;
     
-    // Validate each field
     Object.keys(form).forEach(key => {
       const fieldName = key as keyof MovieForm;
       const errorMessage = validateField(fieldName, form[fieldName]);
@@ -130,7 +126,6 @@ function UpdateMovie() {
     return isValid;
   };
   
-  // Fetch movie data by ID
   const fetchMovie = async () => {
     const error = validateId(id);
     if (error) {
@@ -143,7 +138,7 @@ function UpdateMovie() {
     setIsError(false);
     
     try {
-      const response = await fetch(`http://localhost:5214/api/Movie/get-movie/${id}`);
+      const response = await fetch(`http://localhost:5214/api/Movie/GetMovie/${id}`);
       
       if (response.ok) {
         const movieData: Movie = await response.json();
@@ -161,7 +156,13 @@ function UpdateMovie() {
         if (response.status === 404) {
           setMessage('A megadott ID-vel nem található film.');
         } else {
-          setMessage(`Hiba történt: ${response.statusText}`);
+          let errorText;
+          try {
+            errorText = await response.text();
+          } catch {
+            errorText = response.statusText;
+          }
+          setMessage(`Hiba történt: ${errorText}`);
         }
         setIsError(true);
       }
@@ -175,7 +176,6 @@ function UpdateMovie() {
     }
   };
   
-  // Create Update DTO object
   const createUpdateDto = () => {
     return {
       name: form.name,
@@ -185,13 +185,11 @@ function UpdateMovie() {
     };
   };
   
-  // Handle form submission for update
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage('');
     setIsError(false);
     
-    // Validate all fields before submission
     if (!validateForm()) {
       return;
     }
@@ -200,10 +198,21 @@ function UpdateMovie() {
     
     try {
       setIsLoading(true);
-      const response = await fetch(`http://localhost:5214/api/Movie/update-movie/${id}`, {
+      
+      const token = getToken();
+      
+      if (!token) {
+        setMessage('Nincs bejelentkezve vagy lejárt a munkamenet. Kérjük, jelentkezzen be újra.');
+        setIsError(true);
+        setIsLoading(false);
+        return;
+      }
+      
+      const response = await fetch(`http://localhost:5214/api/Movie/UpdateMovie/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updateDto),
       });
@@ -212,9 +221,24 @@ function UpdateMovie() {
         setMessage('Film sikeresen frissítve!');
         setIsError(false);
       } else {
-        const errorText = await response.text();
-        setMessage(`Hiba történt: ${errorText || response.statusText}`);
+        let errorText;
+        try {
+          const errorData = await response.json();
+          errorText = errorData.message || errorData.title || response.statusText;
+        } catch {
+          try {
+            errorText = await response.text();
+          } catch {
+            errorText = `Hiba: ${response.status} ${response.statusText}`;
+          }
+        }
+        
+        setMessage(`Hiba történt: ${errorText}`);
         setIsError(true);
+        
+        if (response.status === 401) {
+          setMessage('Nincs megfelelő jogosultsága ehhez a művelethez vagy lejárt a munkamenete.');
+        }
       }
     } catch (error) {
       console.error('Hiba történt:', error);
@@ -316,7 +340,6 @@ function UpdateMovie() {
               min={0}
               max={18}
               mb="md"
-              //precision={0}
               disabled={!movieFound || isLoading}
             />
             

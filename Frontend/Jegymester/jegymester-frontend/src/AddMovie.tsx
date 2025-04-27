@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MantineProvider, Container, Title, TextInput, NumberInput, Button, Group, Text, Alert, ActionIcon } from '@mantine/core';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 
 const NAME_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s\-:,.!?()]{2,100}$/;
 const GENRE_PATTERN = /^[A-Za-zÀ-ÖØ-öø-ÿ\s\-,]{2,50}$/;
@@ -30,6 +32,15 @@ function AddMovie() {
   const [message, setMessage] = useState('');
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { getToken, isAdmin } = useAuth();
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!isAdmin) {
+      navigate('/');
+    }
+  }, [isAdmin, navigate]);
+
   const validateField = (name: string, value: any): string => {
     switch (name) {
       case 'name':
@@ -54,6 +65,7 @@ function AddMovie() {
         return '';
     }
   };
+  
   const handleChange = (name: string, value: any) => {
     setForm(prev => ({
       ...prev,
@@ -66,6 +78,7 @@ function AddMovie() {
       [name]: errorMessage
     }));
   };
+  
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     let isValid = true;
@@ -101,23 +114,46 @@ function AddMovie() {
 
     try {
       setIsLoading(true);
-      const response = await fetch('http://localhost:5214/api/Movie/add-movie', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
+      const token = getToken();
       
+      if (!token) {
+        setMessage('Nincs bejelentkezve vagy lejárt a munkamenet. Kérjük, jelentkezzen be újra.');
+        setIsError(true);
+        return;
+      }
+
+const response = await fetch('http://localhost:5214/api/Movie/AddMovie', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  },
+  body: JSON.stringify(formData),
+});
+
+      console.log('Response status:', response.status);
+      console.log('Auth token used:', token);
       if (response.ok) {
+        const data = await response.json();
         setMessage('Film sikeresen hozzáadva!');
         setForm({ name: '', length: '', genre: '', ageLimit: '' });
         setIsError(false);
       } else {
-        setMessage(`Hiba történt: ${data.message || response.statusText}`);
+        let errorMessage;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorData.title || response.statusText;
+        } catch (e) {
+          const text = await response.text();
+          errorMessage = text || `Hiba: ${response.status} ${response.statusText}`;
+        }
+        
+        setMessage(`Hiba történt: ${errorMessage}`);
         setIsError(true);
+        
+        if (response.status === 401) {
+          setMessage('Nincs megfelelő jogosultsága ehhez a művelethez vagy lejárt a munkamenete.');
+        }
       }
     } catch (error) {
       console.error('Hiba történt:', error);
