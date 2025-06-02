@@ -49,7 +49,7 @@ namespace Jegymester.Controllers
         public async Task<IActionResult> DeleteScreening(int id)
         {
             var result = await _screeningService.DeleteScreeningAsync(id);
-            return result ? Ok("Screening deleted.") : NotFound("Screening not found or is already finished.");
+            return result ? Ok("Screening deleted.") : BadRequest("Screening not found or cannot be deleted.");
         }
 
         [HttpPut("{id}")]

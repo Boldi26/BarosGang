@@ -15,6 +15,7 @@ namespace Jegymester.DataContext.Dtos
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
 
+
     }
 
     public class TicketPurchaseDto
@@ -30,6 +31,8 @@ namespace Jegymester.DataContext.Dtos
 
         [Phone]
         public string? PhoneNumber { get; set; }
+
+        public int Quantity { get; set; } = 1;
     }
 
     public class TicketDeleteDto

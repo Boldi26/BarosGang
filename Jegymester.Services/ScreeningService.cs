@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jegymester.Services
 {
@@ -50,6 +51,10 @@ namespace Jegymester.Services
                 return false;
 
             if (screening.StartTime <= DateTime.Now)
+                return false;
+
+            bool hasTickets = await _context.Tickets.AnyAsync(t => t.ScreeningId == id);
+            if (hasTickets)
                 return false;
 
             _context.Screenings.Remove(screening);

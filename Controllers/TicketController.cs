@@ -19,18 +19,27 @@ namespace Jegymester.Controllers
             _ticketService = ticketService;
         }
 
-        [HttpGet("List")]
+        [HttpGet("list")]
         [Authorize]
         public async Task<IActionResult> List()
         {
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-            if (userIdClaim == null)
-                return Unauthorized("User id not found.");
+            if (userIdClaim == null || !int.TryParse(userIdClaim.Value, out var currentUserId))
+                return Unauthorized("User ID is invalid.");
 
-            if (!int.TryParse(userIdClaim.Value, out var userId))
-                return BadRequest("Invalid user id.");
+            var isAdminOrCashier = User.IsInRole("Admin") || User.IsInRole("Cashier");
 
-            var result = await _ticketService.ListAsync(userId);
+            List<TicketDto> result;
+
+            if (isAdminOrCashier)
+            {
+                result = await _ticketService.ListAllAsync();
+            }
+            else
+            {
+                result = await _ticketService.ListAsync(currentUserId);
+            }
+
             return Ok(result);
         }
 

@@ -13,7 +13,8 @@ namespace Jegymester.Services
     public interface ITicketService
     {
         Task<List<TicketDto>> ListAsync(int userId);
-        Task<TicketDto> PurchaseTicketAsync(TicketPurchaseDto ticketDto);
+        Task<List<TicketDto>> ListAllAsync();
+        Task<List<TicketDto>> PurchaseTicketAsync(TicketPurchaseDto ticketDto);
         Task<bool> DeleteTicketAsync(int id);
     }
 
@@ -36,7 +37,14 @@ namespace Jegymester.Services
         .ToListAsync();
         }
 
-        public async Task<TicketDto> PurchaseTicketAsync(TicketPurchaseDto ticketDto)
+        public async Task<List<TicketDto>> ListAllAsync()
+        {
+            return await _context.Tickets
+                .ProjectTo<TicketDto>(_mapper.ConfigurationProvider)
+                .ToListAsync();
+        }
+
+        public async Task<List<TicketDto>> PurchaseTicketAsync(TicketPurchaseDto ticketDto)
         {
             if (ticketDto.UserId == null && (string.IsNullOrWhiteSpace(ticketDto.Email) || string.IsNullOrWhiteSpace(ticketDto.PhoneNumber)))
                 throw new ArgumentException("Email and phone number required for non registered users.");
@@ -81,18 +89,22 @@ namespace Jegymester.Services
                 userId = user.Id;
             }
 
-            var ticket = new Ticket
+            var tickets = new List<Ticket>();
+            for (int i = 0; i < ticketDto.Quantity; i++)
             {
-                ScreeningId = ticketDto.ScreeningId,
-                UserId = userId,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber
-            };
+                tickets.Add(new Ticket
+                {
+                    ScreeningId = ticketDto.ScreeningId,
+                    UserId = user.Id,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber
+                });
+            }
 
-            _context.Tickets.Add(ticket);
+            await _context.Tickets.AddRangeAsync(tickets);
             await _context.SaveChangesAsync();
 
-            return _mapper.Map<TicketDto>(ticket);
+            return _mapper.Map<List<TicketDto>>(tickets);
         }
 
         public async Task<bool> DeleteTicketAsync(int id)
