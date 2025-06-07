@@ -52,8 +52,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("CashierPolicy", policy => policy.RequireRole("Cashier"));
 });
 
-builder.Services.AddCors();
-
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    });
+});
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
@@ -93,12 +101,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors(options =>
-{
-    options.AllowAnyMethod();
-    options.AllowAnyOrigin();
-    options.AllowAnyHeader();
-});
+app.UseCors(); // use default policy
 
 app.UseAuthentication();
 app.UseAuthorization();

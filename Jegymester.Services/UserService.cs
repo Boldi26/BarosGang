@@ -10,6 +10,7 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Azure.Core;
 
 namespace Jegymester.Services
 {
@@ -81,6 +82,7 @@ namespace Jegymester.Services
 
         public async Task<string?> LoginAsync(UserLoginDto userDto)
         {
+            string hash;
             try
             {
                 var user = await _context.Users
@@ -92,6 +94,12 @@ namespace Jegymester.Services
 
                 if (!BCrypt.Net.BCrypt.Verify(userDto.Password.Trim(), user.PasswordHash))
                     return null;
+                hash = user.PasswordHash;
+
+                Console.WriteLine($"Incoming email: {userDto.Email}");
+                Console.WriteLine($"Incoming password: {userDto.Password}");
+                Console.WriteLine($"Stored hash: {hash}");
+                Console.WriteLine($"Password match: {BCrypt.Net.BCrypt.Verify(userDto.Password, hash)}");
 
                 return await GenerateToken(user);
             }
@@ -121,7 +129,8 @@ namespace Jegymester.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.Now.ToString(CultureInfo.InvariantCulture))
+                new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.Now.ToString(CultureInfo.InvariantCulture)),
+                new Claim(ClaimTypes.MobilePhone, user.PhoneNumber ?? "")
             };
 
             if (user.Roles != null && user.Roles.Any())
@@ -132,6 +141,7 @@ namespace Jegymester.Services
 
             return new ClaimsIdentity(claims, "Token");
         }
+
 
         public async Task<UserDto> UpdateUserAsync(int id, UserUpdateDto userDto)
         {

@@ -15,6 +15,7 @@ namespace Jegymester.Services
     {
         List<ScreeningDto> List();
         Task<ScreeningDto> AddScreeningAsync(ScreeningDto screeningDto);
+        Task<ScreeningDto> GetScreeningAsync(int id);
         Task<bool> DeleteScreeningAsync(int id);
         Task<bool> UpdateScreeningAsync(int id, ScreeningUpdateDto screeningDto);
     }
@@ -34,6 +35,12 @@ namespace Jegymester.Services
         {
             var screenings = _context.Screenings.ToList();
             return _mapper.Map<List<ScreeningDto>>(screenings);
+        }
+
+        public async Task<ScreeningDto> GetScreeningAsync(int id)
+        {
+            var screening = await _context.Screenings.FindAsync(id);
+            return screening != null ? _mapper.Map<ScreeningDto>(screening) : null;
         }
 
         public async Task<ScreeningDto> AddScreeningAsync(ScreeningDto screeningDto)

@@ -26,6 +26,17 @@ namespace Jegymester.Controllers
             return Ok(result);
         }
 
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetScreening(int id)
+        {
+            var screening = await _screeningService.GetScreeningAsync(id);
+            if (screening == null)
+                return NotFound("Screening not found");
+
+            return Ok(screening);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddScreening([FromBody] ScreeningDto screeningDto)
         {
